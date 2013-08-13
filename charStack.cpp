@@ -4,10 +4,13 @@ using namespace std;
 
 CharStack::CharStack()
 {
+	elements = new char[INITIAL_CAPACITY];
+	capacity = INITIAL_CAPACITY;
 	count = 0;
 }
 CharStack::~CharStack()
 {
+	delete[] elements;
 }
 
 int CharStack::size()
@@ -24,13 +27,23 @@ void CharStack::clear()
 }
 void CharStack::push(char ch)
 {
-	if (count == MAX_STACK_SIZE)
-		cout << "push:Stack is full\n";
-	else
+	if (count == capacity)
+		expandCapacity();
+	elements[count] = ch;
+	++count;
+	
+}
+void CharStack::expandCapacity()
+{
+	capacity *= 2;
+	char *array = new char[capacity];
+	int i = 0;
+	for(i = 0; i < count ; ++i)
 	{
-		elements[count] = ch;
-		++count;
+		array[i] = elements[i];
 	}
+	delete[] elements;
+	elements = array;
 }
 char CharStack::pop()
 {

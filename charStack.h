@@ -13,8 +13,11 @@ public:
 	char pop();
 	char peek();
 private:
-	static const int MAX_STACK_SIZE = 2;
+	void expandCapacity();
+
+	static const int INITIAL_CAPACITY = 2;
+	int capacity;
 	int count;
-	char elements[MAX_STACK_SIZE];
+	char *elements;
 };
 #endif
