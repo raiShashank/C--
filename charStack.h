@@ -13,6 +13,7 @@ public:
 	char pop();
 	char peek();
 private:
+	//DISALLOW_COPYING(CharStack)
 	void expandCapacity();
 
 	static const int INITIAL_CAPACITY = 2;
